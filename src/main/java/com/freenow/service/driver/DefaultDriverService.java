@@ -1,6 +1,8 @@
 package com.freenow.service.driver;
 
+import com.freenow.dataaccessobject.CarRepository;
 import com.freenow.dataaccessobject.DriverRepository;
+import com.freenow.domainobject.CarDO;
 import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.GeoCoordinate;
 import com.freenow.domainvalue.OnlineStatus;
@@ -25,10 +27,13 @@ public class DefaultDriverService implements DriverService
 
     private final DriverRepository driverRepository;
 
+    private final CarRepository carRepository;
 
-    public DefaultDriverService(final DriverRepository driverRepository)
+
+    public DefaultDriverService(final DriverRepository driverRepository, CarRepository carRepository)
     {
         this.driverRepository = driverRepository;
+        this.carRepository = carRepository;
     }
 
 
@@ -101,6 +106,45 @@ public class DefaultDriverService implements DriverService
         driverDO.setCoordinate(new GeoCoordinate(latitude, longitude));
     }
 
+    /**
+     * Give a driver a car
+     *
+     * @param driverId
+     * @param carId
+     */
+    @Override
+    public void giveDriverCar(long driverId, long carId) throws EntityNotFoundException {
+        DriverDO driverDO = findDriverChecked(driverId);
+        CarDO carDO = findCarChecked(carId);
+
+        driverDO.setCarDO(carDO);
+        carDO.setBeingUsed(true);
+
+        carRepository.save(carDO);
+        driverRepository.save(driverDO);
+
+    }
+
+    /**
+     *
+     * Remove driver from car
+     *
+     * @param driverId
+     * @throws EntityNotFoundException
+     */
+    @Override
+    public void removeDriverFromCar(long driverId) throws EntityNotFoundException {
+        DriverDO driverDO = findDriverChecked(driverId);
+        CarDO carDO = findCarChecked(driverDO.getCarDO().getId());
+
+        driverDO.setCarDO(null);
+        carDO.setBeingUsed(false);
+
+        carRepository.save(carDO);
+        driverRepository.save(driverDO);
+
+    }
+
 
     /**
      * Find all drivers by online state.
@@ -119,5 +163,14 @@ public class DefaultDriverService implements DriverService
         return driverRepository.findById(driverId)
             .orElseThrow(() -> new EntityNotFoundException("Could not find entity with id: " + driverId));
     }
+
+    private CarDO findCarChecked(Long carId) throws EntityNotFoundException
+    {
+        return carRepository.findById(carId)
+                .orElseThrow(() -> new EntityNotFoundException("Could not find entity with id: " + carId));
+    }
+
+
+
 
 }

@@ -3,6 +3,7 @@ package com.freenow.datatransferobject;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.freenow.domainvalue.GeoCoordinate;
+
 import javax.validation.constraints.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -18,18 +19,21 @@ public class DriverDTO
 
     private GeoCoordinate coordinate;
 
+    private CarDTO carDTO;
+
 
     private DriverDTO()
     {
     }
 
 
-    private DriverDTO(Long id, String username, String password, GeoCoordinate coordinate)
+    private DriverDTO(Long id, String username, String password, GeoCoordinate coordinate, CarDTO carDTO)
     {
         this.id = id;
         this.username = username;
         this.password = password;
         this.coordinate = coordinate;
+        this.carDTO = carDTO;
     }
 
 
@@ -63,6 +67,8 @@ public class DriverDTO
         return coordinate;
     }
 
+    public CarDTO getCarDTO() { return carDTO; }
+
 
     public static class DriverDTOBuilder
     {
@@ -70,6 +76,7 @@ public class DriverDTO
         private String username;
         private String password;
         private GeoCoordinate coordinate;
+        private CarDTO carDTO;
 
 
         public DriverDTOBuilder setId(Long id)
@@ -99,10 +106,16 @@ public class DriverDTO
             return this;
         }
 
+        public DriverDTOBuilder setCarDTO(CarDTO carDTO)
+        {
+            this.carDTO = carDTO;
+            return this;
+        }
+
 
         public DriverDTO createDriverDTO()
         {
-            return new DriverDTO(id, username, password, coordinate);
+            return new DriverDTO(id, username, password, coordinate, carDTO);
         }
 
     }

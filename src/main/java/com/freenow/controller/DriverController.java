@@ -78,4 +78,18 @@ public class DriverController
     {
         return DriverMapper.makeDriverDTOList(driverService.find(onlineStatus));
     }
+
+
+    @GetMapping("giveDriverCar/{driverId}/{carId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void giveDriverCar(@PathVariable long driverId, @PathVariable long carId) throws EntityNotFoundException {
+        driverService.giveDriverCar(driverId, carId);
+    }
+
+    @GetMapping("removeDriverFromCar/{driverId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void removeDriverFromCar(@PathVariable long driverId, @PathVariable long carId) throws EntityNotFoundException {
+        driverService.removeDriverFromCar(driverId);
+    }
+
 }

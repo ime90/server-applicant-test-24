@@ -40,3 +40,17 @@ values
  (8,
  'aced0005737200226f72672e737072696e676672616d65776f726b2e646174612e67656f2e506f696e7431b9e90ef11a4006020002440001784400017978704023000000000000404bfa1cac083127', now(), now(), false, 'ONLINE',
 'driver08pw', 'driver08');
+
+-- Create 1 Car
+
+insert into car (id, license_plate, convertible, seat_count, rating, deleted, engine_type) values
+                                                                                                  (1, 'MU12333', false, 4, 9, false, 'GAS');
+
+insert into car (id, license_plate, convertible, seat_count, rating, deleted, engine_type, manufacturer_name, manufacturer_model) values
+(2, 'BE133GH', false, 4, 9, false, 'GAS', 'BMW', 'M5');
+
+
+-- Create 1 ONLINE driver with car
+
+insert into driver (id, date_created, deleted, online_status, password, username, car_id) values (9, now(), false, 'ONLINE',
+                                                                                          'driver09pw', 'driver09', 1);
