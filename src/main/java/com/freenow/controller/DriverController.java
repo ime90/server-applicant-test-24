@@ -4,8 +4,7 @@ import com.freenow.controller.mapper.DriverMapper;
 import com.freenow.datatransferobject.DriverDTO;
 import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.OnlineStatus;
-import com.freenow.exception.ConstraintsViolationException;
-import com.freenow.exception.EntityNotFoundException;
+import com.freenow.exception.*;
 import com.freenow.service.driver.DriverService;
 import java.util.List;
 import javax.validation.Valid;
@@ -79,16 +78,34 @@ public class DriverController
         return DriverMapper.makeDriverDTOList(driverService.find(onlineStatus));
     }
 
+    @GetMapping("findByUsername/{driverName}")
+    public DriverDTO findByUsername(@RequestParam String driverName)
+    {
+        return DriverMapper.makeDriverDTO(driverService.findByUsername(driverName));
+    }
+
+    @GetMapping("findByLicensePlate/{licensePlate}")
+    public DriverDTO findByLicensePlate(@RequestParam String licensePlate)
+    {
+        return DriverMapper.makeDriverDTO(driverService.findByLicensePlate(licensePlate));
+    }
+
+    @GetMapping("findDriversByRating/{rating}")
+    public List<DriverDTO> findDriversByRating(@RequestParam Integer rating)
+    {
+        return DriverMapper.makeDriverDTOList(driverService.findDriversByRating(rating));
+    }
+
 
     @GetMapping("giveDriverCar/{driverId}/{carId}")
     @ResponseStatus(HttpStatus.OK)
-    public void giveDriverCar(@PathVariable long driverId, @PathVariable long carId) throws EntityNotFoundException {
+    public void giveDriverCar(@PathVariable long driverId, @PathVariable long carId) throws EntityNotFoundException, CarAlreadyInUseException, DriverIsNotOnlineException {
         driverService.giveDriverCar(driverId, carId);
     }
 
     @GetMapping("removeDriverFromCar/{driverId}")
     @ResponseStatus(HttpStatus.OK)
-    public void removeDriverFromCar(@PathVariable long driverId, @PathVariable long carId) throws EntityNotFoundException {
+    public void removeDriverFromCar(@PathVariable long driverId) throws EntityNotFoundException, DriverHasNoCarException, DriverIsNotOnlineException {
         driverService.removeDriverFromCar(driverId);
     }
 

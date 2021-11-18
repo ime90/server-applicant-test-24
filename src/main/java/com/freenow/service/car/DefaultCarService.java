@@ -13,6 +13,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -83,7 +84,19 @@ public class DefaultCarService implements CarService
         carDO.setDeleted(true);
     }
 
+    @Override
+    public Collection<CarDO> findFreeCars() {
+        return carRepository.findByIsBeingUsed(false);
+    }
 
+    /**
+     *
+     * Used to check if car exists
+     *
+     * @param carId
+     * @return
+     * @throws EntityNotFoundException
+     */
     private CarDO findCarChecked(Long carId) throws EntityNotFoundException
     {
         return carRepository.findById(carId)

@@ -8,14 +8,17 @@ import com.freenow.exception.EntityNotFoundException;
 import com.freenow.service.car.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * All operations with a car will be routed by this controller.
  * <p/>
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("v1/cars")
 public class CarController
@@ -37,6 +40,12 @@ public class CarController
         return CarMapper.makeCarDTO(carService.find(carId));
     }
 
+
+    @GetMapping("/findFreeCars")
+    public List<CarDTO> findFreeCars() throws EntityNotFoundException
+    {
+        return CarMapper.makeCarDTOList(carService.findFreeCars());
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

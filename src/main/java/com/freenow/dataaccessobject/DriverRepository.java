@@ -12,5 +12,11 @@ import org.springframework.data.repository.CrudRepository;
 public interface DriverRepository extends CrudRepository<DriverDO, Long>
 {
 
+    DriverDO findByUsername(String name);
+
     List<DriverDO> findByOnlineStatus(OnlineStatus onlineStatus);
+
+    DriverDO findByCarDOLicensePlate(String licensePlate);
+
+    List<DriverDO> findByCarDO_Rating(Integer rating);
 }

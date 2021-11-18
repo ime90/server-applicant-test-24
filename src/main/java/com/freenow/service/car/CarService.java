@@ -6,6 +6,7 @@ import com.freenow.domainvalue.OnlineStatus;
 import com.freenow.exception.ConstraintsViolationException;
 import com.freenow.exception.EntityNotFoundException;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface CarService {
@@ -17,4 +18,5 @@ public interface CarService {
 
     void delete(Long carId) throws EntityNotFoundException;
 
+    Collection<CarDO> findFreeCars();
 }

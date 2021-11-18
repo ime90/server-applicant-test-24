@@ -2,6 +2,12 @@
  * CREATE Script for init of DB
  */
 
+ --
+
+INSERT INTO roles(name) VALUES('ROLE_USER');
+INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
+INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+
 -- Create 3 OFFLINE drivers
 
 insert into driver (id, date_created, deleted, online_status, password, username) values (1, now(), false, 'OFFLINE',
@@ -43,8 +49,8 @@ values
 
 -- Create 1 Car
 
-insert into car (id, license_plate, convertible, seat_count, rating, deleted, engine_type) values
-                                                                                                  (1, 'MU12333', false, 4, 9, false, 'GAS');
+insert into car (id, license_plate, convertible, seat_count, rating, deleted, engine_type, is_being_used) values
+                                                                                                  (1, 'MU12333', false, 4, 9, false, 'GAS', true);
 
 insert into car (id, license_plate, convertible, seat_count, rating, deleted, engine_type, manufacturer_name, manufacturer_model) values
 (2, 'BE133GH', false, 4, 9, false, 'GAS', 'BMW', 'M5');
