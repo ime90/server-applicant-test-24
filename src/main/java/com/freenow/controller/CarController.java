@@ -21,6 +21,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("v1/cars")
+@PreAuthorize("hasRole('MODERATOR')")
 public class CarController
 {
 

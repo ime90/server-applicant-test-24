@@ -1,25 +1,22 @@
 package com.freenow.controller;
 
 import com.freenow.controller.mapper.DriverMapper;
+import com.freenow.dataaccessobject.CustomDriverRepository;
+import com.freenow.dataaccessobject.DriverSpecification;
 import com.freenow.datatransferobject.DriverDTO;
 import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.OnlineStatus;
 import com.freenow.exception.*;
+import com.freenow.helper.DriverDORequest;
 import com.freenow.service.driver.DriverService;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * All operations with a driver will be routed by this controller.
@@ -32,13 +29,27 @@ public class DriverController
 
     private final DriverService driverService;
 
+    private final CustomDriverRepository customDriverRepository;
+
+
+
 
     @Autowired
-    public DriverController(final DriverService driverService)
+    public DriverController(final DriverService driverService, CustomDriverRepository customDriverRepository)
     {
         this.driverService = driverService;
+        this.customDriverRepository = customDriverRepository;
     }
 
+
+
+    @GetMapping("/getDrivers")
+    public List<DriverDO> getUsersList(@Valid @RequestBody DriverDORequest request) {
+
+        DriverSpecification driverSpecification = new DriverSpecification(request);
+
+        return customDriverRepository.findAll(driverSpecification);
+    }
 
     @GetMapping("/{driverId}")
     public DriverDTO getDriver(@PathVariable long driverId) throws EntityNotFoundException
