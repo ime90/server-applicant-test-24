@@ -45,9 +45,7 @@ public class DriverController
 
     @GetMapping("/getDrivers")
     public List<DriverDO> getUsersList(@Valid @RequestBody DriverDORequest request) {
-
         DriverSpecification driverSpecification = new DriverSpecification(request);
-
         return customDriverRepository.findAll(driverSpecification);
     }
 
@@ -88,25 +86,6 @@ public class DriverController
     {
         return DriverMapper.makeDriverDTOList(driverService.find(onlineStatus));
     }
-
-    @GetMapping("findByUsername/{driverName}")
-    public DriverDTO findByUsername(@RequestParam String driverName)
-    {
-        return DriverMapper.makeDriverDTO(driverService.findByUsername(driverName));
-    }
-
-    @GetMapping("findByLicensePlate/{licensePlate}")
-    public DriverDTO findByLicensePlate(@RequestParam String licensePlate)
-    {
-        return DriverMapper.makeDriverDTO(driverService.findByLicensePlate(licensePlate));
-    }
-
-    @GetMapping("findDriversByRating/{rating}")
-    public List<DriverDTO> findDriversByRating(@RequestParam Integer rating)
-    {
-        return DriverMapper.makeDriverDTOList(driverService.findDriversByRating(rating));
-    }
-
 
     @GetMapping("giveDriverCar/{driverId}/{carId}")
     @ResponseStatus(HttpStatus.OK)

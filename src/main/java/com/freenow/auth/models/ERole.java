@@ -1,4 +1,4 @@
-package com.freenow.auth.auth.models;
+package com.freenow.auth.models;
 
 public enum ERole {
 	ROLE_USER,

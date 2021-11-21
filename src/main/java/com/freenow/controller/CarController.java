@@ -21,7 +21,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("v1/cars")
-@PreAuthorize("hasRole('MODERATOR')")
+//@PreAuthorize("hasRole('MODERATOR')")
 public class CarController
 {
 
@@ -43,6 +43,7 @@ public class CarController
 
 
     @GetMapping("/findFreeCars")
+    @PreAuthorize("hasRole('MODERATOR')")
     public List<CarDTO> findFreeCars() throws EntityNotFoundException
     {
         return CarMapper.makeCarDTOList(carService.findFreeCars());
@@ -61,6 +62,14 @@ public class CarController
     public void deleteCar(@PathVariable long carId) throws EntityNotFoundException
     {
         carService.delete(carId);
+    }
+
+    @PutMapping("/{carId}")
+    public void updateLocation(
+            @PathVariable long carId, @RequestParam String manufacturerName, @RequestParam String manufacturerModel)
+            throws EntityNotFoundException
+    {
+        carService.updateManufacturer(carId, manufacturerName, manufacturerModel);
     }
 
 

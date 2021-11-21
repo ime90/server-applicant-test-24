@@ -107,12 +107,18 @@ public class DefaultDriverService implements DriverService {
     @Override
     @Transactional
     public void giveDriverCar(long driverId, long carId) throws EntityNotFoundException, CarAlreadyInUseException, DriverIsNotOnlineException {
-        DriverDO driverDO = getDriverDO(driverId);
-        CarDO carDO = findCarChecked(carId);
+        DriverDO driverToAdd = getDriverDO(driverId);
+        CarDO carToFill = findCarChecked(carId);
 
-        if (!carDO.getBeingUsed()) {
-            driverDO.setCarDO(carDO);
-            carDO.setBeingUsed(true);
+        if (!carToFill.getBeingUsed()) {
+
+            if(driverToAdd.getCarDO() != null){
+                CarDO carToEmpty = findCarChecked(driverToAdd.getCarDO().getId());
+                carToEmpty.setBeingUsed(false);
+            }
+
+            driverToAdd.setCarDO(carToFill);
+            carToFill.setBeingUsed(true);
         } else {
             throw new CarAlreadyInUseException("Car with id " + carId + " is already in use");
         }
@@ -151,22 +157,6 @@ public class DefaultDriverService implements DriverService {
     public List<DriverDO> find(OnlineStatus onlineStatus) {
         return driverRepository.findByOnlineStatus(onlineStatus);
     }
-
-    @Override
-    public DriverDO findByUsername(String driverName) {
-        return driverRepository.findByUsername(driverName);
-    }
-
-    @Override
-    public DriverDO findByLicensePlate(String licensePlate) {
-        return driverRepository.findByCarDOLicensePlate(licensePlate);
-    }
-
-    @Override
-    public List<DriverDO> findDriversByRating(Integer rating) {
-        return driverRepository.findByCarDO_Rating(rating);
-    }
-
 
     private DriverDO findDriverChecked(Long driverId) throws EntityNotFoundException {
         return driverRepository.findById(driverId)

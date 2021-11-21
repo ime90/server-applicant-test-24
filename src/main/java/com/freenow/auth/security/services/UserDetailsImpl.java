@@ -1,7 +1,7 @@
-package com.freenow.auth.auth.security.services;
+package com.freenow.auth.security.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.freenow.auth.auth.models.User;
+import com.freenow.auth.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

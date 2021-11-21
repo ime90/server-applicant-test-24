@@ -24,9 +24,4 @@ public interface DriverService
 
     List<DriverDO> find(OnlineStatus onlineStatus);
 
-    DriverDO findByUsername(String driverName);
-
-    DriverDO findByLicensePlate(String licensePlate);
-
-    List<DriverDO> findDriversByRating(Integer rating);
 }

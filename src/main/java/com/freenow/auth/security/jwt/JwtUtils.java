@@ -1,7 +1,7 @@
-package com.freenow.auth.auth.security.jwt;
+package com.freenow.auth.security.jwt;
 
 
-import com.freenow.auth.auth.security.services.UserDetailsImpl;
+import com.freenow.auth.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

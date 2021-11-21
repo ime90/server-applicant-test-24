@@ -24,6 +24,10 @@ public class CarDO {
     private String licensePlate;
 
     @Column(nullable = false)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private ZonedDateTime dateCreated = ZonedDateTime.now();
+
+    @Column(nullable = false)
     @NotNull(message = "Seat count can not be null!")
     private Integer seatCount;
 

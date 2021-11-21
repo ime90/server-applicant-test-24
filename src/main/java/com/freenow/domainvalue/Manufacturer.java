@@ -16,6 +16,14 @@ public class Manufacturer {
     @Column(name = "manufacturer_model")
     private String model;
 
+    public Manufacturer(String name, String model) {
+        this.name = name;
+        this.model = model;
+    }
+
+    public Manufacturer() {
+
+    }
 
     public String getName() {
         return name;

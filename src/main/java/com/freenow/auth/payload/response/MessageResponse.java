@@ -1,4 +1,4 @@
-package com.freenow.auth.auth.payload.response;
+package com.freenow.auth.payload.response;
 
 public class MessageResponse {
 	private String message;

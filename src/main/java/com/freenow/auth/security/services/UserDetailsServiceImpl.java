@@ -1,7 +1,7 @@
-package com.freenow.auth.auth.security.services;
+package com.freenow.auth.security.services;
 
-import com.freenow.auth.auth.models.User;
-import com.freenow.auth.auth.repository.UserRepository;
+import com.freenow.auth.models.User;
+import com.freenow.auth.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

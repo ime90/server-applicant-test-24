@@ -1,4 +1,4 @@
-package com.freenow.auth.auth.controllers;
+package com.freenow.auth.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;

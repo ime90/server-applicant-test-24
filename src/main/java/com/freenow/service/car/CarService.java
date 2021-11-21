@@ -18,5 +18,7 @@ public interface CarService {
 
     void delete(Long carId) throws EntityNotFoundException;
 
+    void updateManufacturer(long carId, String manufacturerName, String manufacturerModel) throws EntityNotFoundException;
+
     Collection<CarDO> findFreeCars();
 }

@@ -1,4 +1,4 @@
-package com.freenow.auth.auth.security.jwt;
+package com.freenow.auth.security.jwt;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

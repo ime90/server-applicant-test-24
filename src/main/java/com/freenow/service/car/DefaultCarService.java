@@ -4,6 +4,7 @@ import com.freenow.dataaccessobject.CarRepository;
 import com.freenow.domainobject.CarDO;
 import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.GeoCoordinate;
+import com.freenow.domainvalue.Manufacturer;
 import com.freenow.domainvalue.OnlineStatus;
 import com.freenow.exception.ConstraintsViolationException;
 import com.freenow.exception.EntityNotFoundException;
@@ -82,6 +83,20 @@ public class DefaultCarService implements CarService
     {
         CarDO carDO = findCarChecked(carId);
         carDO.setDeleted(true);
+    }
+
+    /**
+     * Updates the selected car with a make and model of the manufacturer.
+     *
+     * @param carId
+     * @param manufacturerName
+     * @param manufacturerModel
+     */
+    @Override
+    @Transactional
+    public void updateManufacturer(long carId, String manufacturerName, String manufacturerModel) throws EntityNotFoundException {
+        CarDO carDO = findCarChecked(carId);
+        carDO.setManufacturer(new Manufacturer(manufacturerName, manufacturerModel));
     }
 
     @Override

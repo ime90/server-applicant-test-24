@@ -1,8 +1,8 @@
-package com.freenow.auth.auth.security;
+package com.freenow.auth.security;
 
-import com.freenow.auth.auth.security.jwt.AuthEntryPointJwt;
-import com.freenow.auth.auth.security.jwt.AuthTokenFilter;
-import com.freenow.auth.auth.security.services.UserDetailsServiceImpl;
+import com.freenow.auth.security.jwt.AuthEntryPointJwt;
+import com.freenow.auth.security.jwt.AuthTokenFilter;
+import com.freenow.auth.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

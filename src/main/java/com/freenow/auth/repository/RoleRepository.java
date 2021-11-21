@@ -1,7 +1,7 @@
-package com.freenow.auth.auth.repository;
+package com.freenow.auth.repository;
 
-import com.freenow.auth.auth.models.ERole;
-import com.freenow.auth.auth.models.Role;
+import com.freenow.auth.models.ERole;
+import com.freenow.auth.models.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.freenow.auth.auth.payload.request;
+package com.freenow.auth.payload.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

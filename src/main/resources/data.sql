@@ -50,14 +50,23 @@ values
 
 -- Create 1 Car
 
-insert into car (id, license_plate, convertible, seat_count, rating, deleted, engine_type, is_being_used) values
-                                                                                                  (1, 'MU12333', false, 4, 9, false, 'GAS', true);
+insert into car (id, date_created, license_plate, convertible, seat_count, rating, deleted, engine_type, is_being_used) values
+(1, now(), 'MU12333', false, 4, 9, false, 'GAS', true);
 
-insert into car (id, license_plate, convertible, seat_count, rating, deleted, engine_type, manufacturer_name, manufacturer_model) values
-(2, 'BE133GH', false, 4, 9, false, 'GAS', 'BMW', 'M5');
+insert into car (id, date_created, license_plate, convertible, seat_count, rating, deleted, engine_type, manufacturer_name, manufacturer_model) values
+(2, now(), 'BE133GH', false, 4, 9, false, 'GAS', 'BMW', 'M5');
+
+insert into car (id, date_created, license_plate, convertible, seat_count, rating, deleted, engine_type, manufacturer_name, manufacturer_model) values
+(3, now(), 'HA1812DD', false, 5, 6, false, 'ELECTRIC', 'Mercedes', 'C class');
+
+insert into car (id, date_created, license_plate, convertible, seat_count, rating, deleted, engine_type, manufacturer_name, manufacturer_model, is_being_used) values
+(4, now(), 'HA1444F', false, 5, 9, false, 'DIESEL', 'Audi', 'Q5', true);
 
 
 -- Create 1 ONLINE driver with car
 
 insert into driver (id, date_created, deleted, online_status, password, username, car_id) values (9, now(), false, 'ONLINE',
                                                                                           'driver09pw', 'driver09', 1);
+
+insert into driver (id, date_created, deleted, online_status, password, username, car_id) values (10, now(), false, 'ONLINE',
+                                                                                                  'driver10pw', 'driver10', 4);

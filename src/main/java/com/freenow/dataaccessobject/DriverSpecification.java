@@ -30,14 +30,18 @@ public class DriverSpecification implements Specification<DriverDO> {
             predicates.add(onlineStatus);
         }
         if (criteria.getCarDO() != null) {
-            Join<DriverDO, CarDO> car = root.join("carDO");
-            final Predicate licensePlate = builder.equal(car.get("licensePlate"), criteria.getCarDO().getLicensePlate());
-            predicates.add(licensePlate);
+            if (criteria.getCarDO().getLicensePlate() != null) {
+                Join<DriverDO, CarDO> car = root.join("carDO");
+                final Predicate licensePlate = builder.equal(car.get("licensePlate"), criteria.getCarDO().getLicensePlate());
+                predicates.add(licensePlate);
+            }
         }
         if (criteria.getCarDO() != null) {
-            Join<DriverDO, CarDO> car = root.join("carDO");
-            final Predicate rating = builder.equal(car.get("rating"), criteria.getCarDO().getRating());
-            predicates.add(rating);
+            if (criteria.getCarDO().getRating() != null) {
+                Join<DriverDO, CarDO> car = root.join("carDO");
+                final Predicate rating = builder.equal(car.get("rating"), criteria.getCarDO().getRating());
+                predicates.add(rating);
+            }
         }
         return builder.and(predicates.toArray(new Predicate[predicates.size()]));
     }

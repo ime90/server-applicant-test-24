@@ -50,7 +50,7 @@ public class DriverDO
     private CarDO carDO;
 
 
-    private DriverDO(){    }
+    public DriverDO(){    }
 
 
     public DriverDO(String username, String password)

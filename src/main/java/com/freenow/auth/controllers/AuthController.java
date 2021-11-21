@@ -1,17 +1,17 @@
-package com.freenow.auth.auth.controllers;
+package com.freenow.auth.controllers;
 
 
-import com.freenow.auth.auth.models.ERole;
-import com.freenow.auth.auth.models.Role;
-import com.freenow.auth.auth.models.User;
-import com.freenow.auth.auth.payload.request.LoginRequest;
-import com.freenow.auth.auth.payload.request.SignupRequest;
-import com.freenow.auth.auth.payload.response.JwtResponse;
-import com.freenow.auth.auth.payload.response.MessageResponse;
-import com.freenow.auth.auth.repository.RoleRepository;
-import com.freenow.auth.auth.repository.UserRepository;
-import com.freenow.auth.auth.security.jwt.JwtUtils;
-import com.freenow.auth.auth.security.services.UserDetailsImpl;
+import com.freenow.auth.models.ERole;
+import com.freenow.auth.models.Role;
+import com.freenow.auth.models.User;
+import com.freenow.auth.payload.request.LoginRequest;
+import com.freenow.auth.payload.request.SignupRequest;
+import com.freenow.auth.payload.response.JwtResponse;
+import com.freenow.auth.payload.response.MessageResponse;
+import com.freenow.auth.repository.RoleRepository;
+import com.freenow.auth.repository.UserRepository;
+import com.freenow.auth.security.jwt.JwtUtils;
+import com.freenow.auth.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,6 +27,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * The auth controller that is used for sign ups and sign ins of users into the application
+ */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/v1/auth")
